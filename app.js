@@ -1,12 +1,12 @@
 const nodeLocations = ["Main Gate", "Aula Barat", "Campus Center", "Library", "Salman Mosque", "GKU Timur", "Labtek V", "Labtek VIII", "Sunken Court", "Student Activity Center", "Jalan Ganesa", "Sabuga Entrance", "Babakan Siliwangi Entrance", "Braga Street", "Bandung Station Entrance"];
 const nodes = nodeLocations.map((name, i) => ({ id: `CRSNa-${String(i + 1).padStart(2, "0")}`, name, lat: -6.8915 + ((i % 5) - 2) * 0.0012 + Math.floor(i / 5) * 0.0005, lng: 107.6107 + ((i * 7) % 9 - 4) * 0.0011 + Math.floor(i / 5) * 0.0018 }));
-const reports = [
+let reports = [
   { id: "#1248", type: "Robbery", location: "Node 01 · Main Gate", time: "5 min ago", status: "Open", level: "High" },
   { id: "#1247", type: "Public Nuisance", location: "Node 04 · Library", time: "18 min ago", status: "In progress", level: "Medium" },
   { id: "#1246", type: "Street Light Failure", location: "Node 07 · Labtek V", time: "28 min ago", status: "Open", level: "Low" },
   { id: "#1245", type: "Water Leakage", location: "Node 09 · Sunken Court", time: "1 hour ago", status: "Resolved", level: "Low" }
 ];
-const alerts = [
+let alerts = [
   { title: "Potential distress detected", detail: "Keyword + sustained volume · Node 07", distance: "120 m away", level: "High" },
   { title: "Unusual sound pattern", detail: "Two nearby nodes corroborating · Node 12", distance: "340 m away", level: "Medium" },
   { title: "Low visibility reported", detail: "Public report · Node 03", distance: "510 m away", level: "Medium" }
@@ -17,6 +17,8 @@ let adminPage = "overview";
 const app = document.querySelector("#app");
 const esc = (s) => String(s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#039;"}[c]));
 function toast(message) { const el = document.querySelector(".toast"); if (!el) return; el.textContent = message; el.classList.add("show"); setTimeout(() => el.classList.remove("show"), 2500); }
+function parseCsv(text) { const lines = text.trim().split(/\r?\n/); const headers = lines.shift().split(","); return lines.filter(Boolean).map(line => { const values = line.split(","); return headers.reduce((row, key, i) => { row[key] = values[i] ?? ""; return row; }, {}); }); }
+async function loadDummyData() { try { const [nodeResponse, reportResponse, alertResponse] = await Promise.all([fetch("data/nodes.csv"), fetch("data/reports.csv"), fetch("data/alerts.csv")]); if (![nodeResponse, reportResponse, alertResponse].every(response => response.ok)) throw new Error("CSV data unavailable"); const csvNodes = parseCsv(await nodeResponse.text()); const csvReports = parseCsv(await reportResponse.text()); const csvAlerts = parseCsv(await alertResponse.text()); nodes.splice(0, nodes.length, ...csvNodes.map(node => ({ ...node, latitude: Number(node.latitude), longitude: Number(node.longitude) }))); reports = csvReports; alerts = csvAlerts; render(); } catch (error) { console.warn("Using built-in CRSNa demo data.", error); } }
 function brand() { return `<div class="brand"><span class="brand-mark">CR</span><span>CRSNa</span></div>`; }
 function portalButton() { return `<button class="mode-portal" data-action="switch">${mode === "admin" ? "Switch to Public" : "Switch to Admin"}</button>`; }
 function render() { app.innerHTML = mode === null ? portal() : mode === "public" ? publicView().replace(/Node \d+ · /g, "").replace(/Node \d+/g, "") : adminView(); if (mode === "public" && publicPage === "form") { const select = app.querySelector("select"); ["Pothole or damaged pavement", "Broken street light", "Water leakage or flooding", "Blocked drain", "Damaged sidewalk", "Unsafe crossing", "Waste or illegal dumping", "Broken public facility"].forEach(label => { const option = document.createElement("option"); option.textContent = label; select.appendChild(option); }); } if (mode === "admin" && (adminPage === "overview" || adminPage === "map")) { app.querySelectorAll(".map").forEach(map => { const sites = document.createElement("div"); sites.className = "map-sites"; sites.innerHTML = nodeLocations.map((name, i) => `<span><strong>${nodes[i].id}</strong> · ${name}</span>`).join("<br>"); map.appendChild(sites); setupLiveMap(map); }); } }
@@ -37,3 +39,4 @@ function adminSection(section) { const config = {map:["Live map","Node and repor
 document.addEventListener("click", e => { const modeEl = e.target.closest("[data-mode]"); if(modeEl){ mode = modeEl.dataset.mode; render(); return; } const action = e.target.closest("[data-action]")?.dataset.action; if(action === "switch"){ mode = mode === "admin" ? "public" : "admin"; render(); return; } if(action === "refresh"){ toast("Network refreshed · all local data is current"); return; } if(action === "location"){ toast("Location permission requested · showing Node 07 nearby alerts"); return; } if(action === "ack"){ toast("Alert acknowledged and assigned for review"); return; } if(action === "dismiss"){ toast("Alert dismissed as environmental noise"); return; } const pub = e.target.closest("[data-public]")?.dataset.public; if(pub){ publicPage = pub; render(); return; } const adm = e.target.closest("[data-admin]")?.dataset.admin; if(adm){ adminPage = adm; render(); return; } });
 document.addEventListener("submit", e => { if(e.target.id === "report-form"){ e.preventDefault(); publicPage = "tracking"; render(); toast("Report submitted · #1248"); } });
 render();
+loadDummyData();
