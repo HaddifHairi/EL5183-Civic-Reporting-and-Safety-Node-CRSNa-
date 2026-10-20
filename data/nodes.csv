@@ -1,0 +1,16 @@
+node_id,location_name,area,latitude,longitude,status,wifi_signal,last_sync,nfc_status
+CRSNa-01,Main Gate,ITB Ganesha Campus,-6.8915,107.6107,Online,Strong,Just now,Ready
+CRSNa-02,Aula Barat,ITB Ganesha Campus,-6.8920,107.6097,Online,Strong,2 min ago,Ready
+CRSNa-03,Campus Center,ITB Ganesha Campus,-6.8912,107.6118,Online,Good,1 min ago,Ready
+CRSNa-04,Library,ITB Ganesha Campus,-6.8919,107.6122,Online,Good,Just now,Ready
+CRSNa-05,Salman Mosque,ITB Ganesha Campus,-6.8928,107.6114,Online,Strong,3 min ago,Ready
+CRSNa-06,GKU Timur,ITB Ganesha Campus,-6.8908,107.6127,Online,Good,2 min ago,Ready
+CRSNa-07,Labtek V,ITB Ganesha Campus,-6.8908,107.6098,Online,Strong,Just now,Ready
+CRSNa-08,Labtek VIII,ITB Ganesha Campus,-6.8900,107.6109,Online,Good,4 min ago,Ready
+CRSNa-09,Sunken Court,ITB Ganesha Campus,-6.8924,107.6115,Online,Strong,Just now,Ready
+CRSNa-10,Student Activity Center,ITB Ganesha Campus,-6.8930,107.6099,Needs attention,Weak,18 min ago,Ready
+CRSNa-11,Jalan Ganesa,Nearby ITB Area,-6.8899,107.6086,Online,Good,5 min ago,Ready
+CRSNa-12,Sabuga Entrance,Nearby ITB Area,-6.8871,107.6068,Online,Strong,2 min ago,Ready
+CRSNa-13,Babakan Siliwangi Entrance,Nearby ITB Area,-6.8848,107.6048,Online,Good,6 min ago,Ready
+CRSNa-14,Braga Street,Bandung City,-6.9175,107.6097,Online,Strong,1 min ago,Ready
+CRSNa-15,Bandung Station Entrance,Bandung City,-6.9147,107.6020,Offline,Unknown,42 min ago,Unavailable
