@@ -1,0 +1,7 @@
+report_id,report_type,severity,status,verified,description,node_id,location_name,latitude,longitude,reported_at,source,confidence
+R-1248,Robbery,High,Open,false,Person reported being followed near the entrance,CRSNa-01,Main Gate,-6.8915,107.6107,2026-10-20T10:25:00+07:00,Public report,0.86
+R-1247,Public Nuisance,Medium,In Progress,true,Repeated disturbance reported near the library,CRSNa-04,Library,-6.8919,107.6122,2026-10-20T10:12:00+07:00,Audio corroboration,0.78
+R-1246,Street Light Failure,Low,Open,true,Light not functioning after sunset,CRSNa-07,Labtek V,-6.8908,107.6098,2026-10-20T09:58:00+07:00,Safety officer,0.94
+R-1245,Water Leakage,Low,Resolved,true,Water pooling beside the walkway,CRSNa-09,Sunken Court,-6.8924,107.6115,2026-10-20T09:15:00+07:00,Public report,0.97
+R-1244,Blocked Drain,Medium,Open,false,Drain is overflowing after rain,CRSNa-06,GKU Timur,-6.8908,107.6127,2026-10-20T08:49:00+07:00,Public report,0.82
+R-1243,Unsafe Crossing,High,In Progress,true,Vehicle conflict reported at the campus crossing,CRSNa-11,Jalan Ganesa,-6.8899,107.6086,2026-10-20T08:31:00+07:00,Corroborated alert,0.91
