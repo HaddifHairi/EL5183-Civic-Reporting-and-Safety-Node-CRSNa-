@@ -1,0 +1,6 @@
+alert_id,alert_type,severity,status,verified,trigger,decibel_level,duration_seconds,node_id,location_name,latitude,longitude,created_at,confidence,officer_label
+A-071,Potential distress detected,High,Under review,false,Keyword + sustained volume,82,18,CRSNa-01,Main Gate,-6.8915,107.6107,2026-10-20T10:24:00+07:00,0.86,Pending review
+A-070,Unusual sound pattern,Medium,Acknowledged,true,Two nearby nodes corroborating,74,42,CRSNa-04,Library,-6.8919,107.6122,2026-10-20T10:04:00+07:00,0.78,Public Nuisance
+A-069,Environmental noise,Low,Dismissed,false,High volume without keyword,88,95,CRSNa-07,Labtek V,-6.8908,107.6098,2026-10-20T09:42:00+07:00,0.31,False positive
+A-068,Possible altercation,High,Verified,true,Keyword + repeated impact pattern,79,24,CRSNa-10,Student Activity Center,-6.8930,107.6099,2026-10-20T09:18:00+07:00,0.91,Robbery risk
+A-067,Public disturbance,Medium,Verified,true,Keyword + nearby report,76,31,CRSNa-06,GKU Timur,-6.8908,107.6127,2026-10-20T08:46:00+07:00,0.84,Public Nuisance
